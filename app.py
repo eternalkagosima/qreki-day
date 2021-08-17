@@ -11,7 +11,7 @@ from qreki import Kyureki
 
 app = Flask(__name__)
 
-@api.route('/', methods=['GET'])
+@app.route('/', methods=['GET'])
 def calcRoku():
 	year = int(request.args.get("year"))
 	month = int(request.args.get("month"))
