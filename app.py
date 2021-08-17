@@ -9,7 +9,7 @@ from flask import Flask, jsonify, make_response, request
 import json
 from qreki import Kyureki
 
-api = Flask(__name__)
+app = Flask(__name__)
 
 @api.route('/', methods=['GET'])
 def calcRoku():
@@ -28,4 +28,4 @@ def calcRoku():
 	return make_response(jsonify(result))
 
 if __name__ == '__main__':
-	api.run(host='0.0.0.0', port=5000,debug=True)
+	app.run(host='0.0.0.0', port=5000,debug=True)
