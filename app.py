@@ -8,14 +8,23 @@
 from flask import Flask, jsonify, make_response, request
 import json
 from qreki import Kyureki
+from datetime import datetime,timedelta,timezone
 
 app = Flask(__name__)
 
 @app.route('/', methods=['GET'])
 def calcRoku():
-	year = int(request.args.get("year"))
-	month = int(request.args.get("month"))
-	day = int(request.args.get("day"))
+	try:
+		year = int(request.args.get("year"))
+		month = int(request.args.get("month"))
+		day = int(request.args.get("day"))
+	except:
+		JST = timezone(timedelta(hours=+9),'JST')
+		now = datetime.now(JST)
+		year = now.year
+		month = now.month
+		day = now.day
+		
 	qrk = Kyureki(year,month,0,day)
 	qstr = qrk.from_ymd(year,month,day)
 	result = {
